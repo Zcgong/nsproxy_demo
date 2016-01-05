@@ -10,6 +10,4 @@
 
 @interface AOPProxyDemo : NSObject
 
-//@property (nonatomic, retain) NSMutableArray *
-
 @end
