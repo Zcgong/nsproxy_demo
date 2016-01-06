@@ -15,11 +15,13 @@
     const char *sels = NSStringFromSelector(invocation.selector).UTF8String;
     const char *cls = NSStringFromClass([invocation.target class]).UTF8String;
     
-    NSLog(@"START -[%s %s] args:%ld returns:%s\n", sels, cls, invocation.methodSignature.numberOfArguments, invocation.methodSignature.methodReturnType);
+    NSLog(@"START -[%s %s] args:%ld returns:%s\n",
+          sels, cls, invocation.methodSignature.numberOfArguments, invocation.methodSignature.methodReturnType);
     
     [super invokeOriginalMethod:invocation];
     
-    NSLog(@"\nEND -[%s %s] args:%ld returns:%s\n", sels, cls, invocation.methodSignature.numberOfArguments, invocation.methodSignature.methodReturnType);
+    NSLog(@"\nEND -[%s %s] args:%ld returns:%s\n",
+          sels, cls, invocation.methodSignature.numberOfArguments, invocation.methodSignature.methodReturnType);
 }
 
 @end

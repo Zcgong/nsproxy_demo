@@ -12,17 +12,25 @@
 @interface AOPProxy ()
 
 @property (readonly) id proxiedObject;
-@property (nonatomic, copy) NSMutableArray *methodInterceptors;
+@property (nonatomic, retain) NSMutableArray *methodInterceptors;
 
 @end
 
 @implementation AOPProxy
 
+- (NSMutableArray *)methodInterceptors
+{
+    if(!_methodInterceptors)
+    {
+        _methodInterceptors = [[NSMutableArray alloc] init];
+    }
+    return _methodInterceptors;
+}
+
 - (id)initWithObject:(id)obj
 {
     _proxiedObject = obj;
-    _methodInterceptors = @[].mutableCopy;
-    return self ?: nil;
+    return self;
 }
 
 + (instancetype)proxyWithObject:(id)obj
@@ -32,7 +40,7 @@
 
 + (instancetype)proxyWithClass:(Class)aClass
 {
-    return [self.class proxyWithClass:[aClass class]];
+    return [self.class proxyWithObject:[aClass new]];
 }
 
 - (BOOL)isKindOfClass:(Class)aClass

@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import "NSMutableStringAndArray.h"
+#import "AOPProxyDemo.h"
+#import "AOPProxy.h"
+#import "AOPMethodLogger.h"
 
 @interface ViewController ()
 
@@ -19,6 +22,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [self testNSProxy];
+    [self testAOP1];
+    [self testAOP2];
+}
+
+- (void)testNSProxy
+{
     id/*NSMutableStringAndArray*/ stringAndArrayProxy = [[NSMutableStringAndArray alloc] init];
     [stringAndArrayProxy appendString:@"This "];
     [stringAndArrayProxy appendString:@"is "];
@@ -37,6 +47,21 @@
     {
         NSLog(@"Appending failed:%@", stringAndArrayProxy);
     }
+}
+
+- (void)testAOP1
+{
+    [AOPProxyDemo testProxy:[AOPProxy proxyWithObject:NSMutableArray.new]];
+    [AOPProxyDemo testProxy:[AOPMethodLogger proxyWithClass:NSMutableArray.class]];
+    
+    AOPProxyDemo *proxyTest = [[AOPProxyDemo alloc] init];
+    [proxyTest.proxy addObject:@1];
+    [proxyTest.proxy removeObjectAtIndex:0];
+    [proxyTest.proxy count];
+}
+
+- (void)testAOP2
+{
 }
 
 - (void)didReceiveMemoryWarning {

@@ -10,4 +10,8 @@
 
 @interface AOPProxyDemo : NSObject
 
+@property (nonatomic, retain) id proxy;
+
++ (void)testProxy:(id)proxy;
+
 @end

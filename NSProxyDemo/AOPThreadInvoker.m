@@ -21,7 +21,7 @@
 {
     if([super initWithObject:instance]) self.serializerThread = thread;
     
-    return self ?: nil;
+    return self;
 }
 
 - (void)invokeOriginalMethod:(NSInvocation *)invocation
